@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Search YouTube</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-
-
-
-<script type="text/javascript" src="jQuery"></script>
-<script type="text/javascript" src="app.js"></script>
-</body>
+	<head>
+	  <meta charset="utf-8">
+	  <title>YouTube Search API</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+	  <link rel="stylesheet" type="text/css" href="grid.css">
+	  <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+	  <header>
+	    <h1>YouTube Search</h1>
+	    <form action="#" class="js-search-form">
+	      <label for="query"></label>
+	      <input type="text" class="js-query">
+	      <button type="submit">Search</button>
+	    </form>
+	  </header>
+	  <main class="search-results">
+	  <!-- html tags will be appended into this .row tag -->
+	    <div class="js-search-results row">
+			<div class="col-4">
+				<div class="box">
+					<a href="https://i.ytimg.com/vi/iM4lygh23fQ/default.jpg"><img src="https://i.ytimg.com/vi/iM4lygh23fQ/mqdefault.jpg"></a>
+					<div class="description">
+					<p class="title"></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="box rey">
+					<a href="https://i.ytimg.com/vi/iM4lygh23fQ/default.jpg"><img src="https://i.ytimg.com/vi/iM4lygh23fQ/mqdefault.jpg"></a>
+					<div class="description">
+						<p class="title"></p>
+					</div>
+				</div>
+			</div>
+	    </div>
+	  </main>
+	  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	  <script type="text/javascript" src="app.js"></script>
+	</body>
 </html>
+
+

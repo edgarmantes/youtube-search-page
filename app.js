@@ -11,40 +11,41 @@ function getDataFromApi(searchTerm, callback) {
 
 
 function displaySearchData(data) {
-  var resultElement = '';
-  if (data.items) {
-  	console.log(data.items);
-    data.items.forEach(function(data) {
-     var templete = $('.col-4');
-     var new_child = $(templete[0]).clone();
-     console.log(new_child);
-     new_child.find('a').attr('href', data.id.videoId);
-    new_child.find('img').attr('src', data.snippet.thumbnails.medium.url);
-   // console.log(new_child);
-    $('.js-search-results').append(new_child);
-    //resultElement += <div class="col-4"> <div class="box rey"> <img src="images/rey_square.png"><div class="description"><h3 class="name">Ray</h3><p class="desc">Protagonist, from Tatooine</p></div></div></div>
+    var result = '';
+    console.log(data)
+   //$('.js-search-results').detach();
+    if (data.items.length !== 0) {
+     	data.items.forEach(function(data) {
+     			var col = $('<div>').addClass('col-4');
+     			var box = $('<div>').addClass('box');
+     			var desc = $('<div>').addClass('description');
+     			var href = $('<a>').attr('href', 'https://www.youtube.com/watch?v=' + data.id.videoId).attr('target', '_blank');
+     			var image = $('<img>').attr('src', data.snippet.thumbnails.medium.url);
+     			var title = $('<p>').text(data.snippet.description);
+     			var titl = $(desc).append(title);
+     			var link = $(href).append(image);
+     			var boxy = $(box).append(href).append(titl)
+     			var col4 = $(col).append(boxy);
+     			$('.js-search-results').append(col4);
+     			console.log(image)
+        }); 	
+    } else {
+    	var result = $('<p>').text('No results');
+		$('.js-search-results').append(result);
+    }
 
-    });
-  }
-  else {
-    resultElement += '<p>No results</p>';
-  }
-  
-  //$('.js-search-results').html(resultElement);
 }
 
 function watchSubmit() {
   $('.js-search-form').submit(function(e) {
+	var clearNode = document.getElementsByClassName('js-search-results')[0];
+    clearNode.innerHTML = ' ';    
     e.preventDefault();
     var query = $(this).find('.js-query').val();
     getDataFromApi(query, displaySearchData);
+    $('.js-query').val('');
   });
 }
 
 $(function(){watchSubmit();});
 
-
-
-
-
-// <div class="col-4"> <div class="box rey"> <img src="images/rey_square.png"><div class="description"><h3 class="name">Ray</h3><p class="desc">Protagonist, from Tatooine</p></div></div></div>

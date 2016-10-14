@@ -51,11 +51,14 @@ function watchSubmit() {
     $('.js-query').val('');
   });
 
-  $('.remove').click(function(e){
-  	e.stopPropagation();
+  $('.js-search-results').on('click', '.remove', function(e){
+  	e.preventDefault();
   	$(this).closest('.col-4').remove();
   });
+
 }
 
-$(function(){watchSubmit();});
+$(document).ready(function(){
+	watchSubmit();
+});
 

@@ -13,7 +13,7 @@ function getDataFromApi(searchTerm, callback) {
 function displaySearchData(data) {
     var result = '';
     console.log(data)
-   //$('.js-search-results').detach();
+   
     if (data.items.length !== 0) {
      	data.items.forEach(function(data) {
      			var col = $('<div>').addClass('col-4');
@@ -22,12 +22,18 @@ function displaySearchData(data) {
      			var href = $('<a>').attr('href', 'https://www.youtube.com/watch?v=' + data.id.videoId).attr('target', '_blank');
      			var image = $('<img>').attr('src', data.snippet.thumbnails.medium.url);
      			var title = $('<p>').text(data.snippet.description);
-     			var titl = $(desc).append(title);
-     			var link = $(href).append(image);
-     			var boxy = $(box).append(href).append(titl)
-     			var col4 = $(col).append(boxy);
+     			var remove = $('<button>').attr('input', 'button').attr('class','remove').text('Delete');
+
+     			var titl = $(desc).append(title).append(remove);
+     			
+
+     			var boxy = $(box).append(image).append(titl);
+     			var link = $(href).append(boxy);
+     			
+
+     			//var boxy = $(box).append(href).append(titl)
+     			var col4 = $(col).append(link);
      			$('.js-search-results').append(col4);
-     			console.log(image)
         }); 	
     } else {
     	var result = $('<p>').text('No results');
@@ -38,12 +44,16 @@ function displaySearchData(data) {
 
 function watchSubmit() {
   $('.js-search-form').submit(function(e) {
-	var clearNode = document.getElementsByClassName('js-search-results')[0];
-    clearNode.innerHTML = ' ';    
-    e.preventDefault();
+    e.preventDefault();	
+	$('.js-search-results').empty();    
     var query = $(this).find('.js-query').val();
     getDataFromApi(query, displaySearchData);
     $('.js-query').val('');
+  });
+
+  $('.remove').click(function(e){
+  	e.stopPropagation();
+  	$(this).closest('.col-4').remove();
   });
 }
 

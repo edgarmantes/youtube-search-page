@@ -31,7 +31,6 @@ function displaySearchData(data) {
      			var link = $(href).append(boxy);
      			
 
-     			//var boxy = $(box).append(href).append(titl)
      			var col4 = $(col).append(link);
      			$('.js-search-results').append(col4);
         }); 	

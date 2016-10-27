@@ -1,22 +1,22 @@
 
 // This is the YouTube API call Object. It also has a prototypical inheritance of the 'callAPI' method
-var Data = function(searchTerm, callback){
+var Data = function(searchTerm){
   this.url = 'https://www.googleapis.com/youtube/v3/search';
   this.query = {
     part: 'snippet',
     q: searchTerm,
     key: 'AIzaSyBN_2IeT7Ez2Wp2gsecionVgTUc4uL-hh4',
   }
-  console.log(typeof(Data.callAPI));
 }
 
 
 // The API call to YouTube
-Data.prototype.callAPI = function(){
+Data.prototype.callAPI = function(callback){
+  console.log(callback)
   $.getJSON(url, query, callback);
 }
 
-// Captures data from Youtube API and has a prototypical inheritance of the 'render' method
+// Captures data from Youtube API and has a prototypical inheritance of the 'render' method to render onto DOM
 var Items = function(data){
   this.col = $('<div>').addClass('col-4');
   this.box = $('<div>').addClass('box');
@@ -30,7 +30,7 @@ var Items = function(data){
 }
 
 // This renders method that is inherited by Items object
-Items.prototype.render = function(){
+Items.prototype.render = function(data){
   var titl = $(desc).append(title).append('<br>').append(remove)
         
 
@@ -48,8 +48,8 @@ function displaySearchData(data) {
    
     if (data.items.length !== 0) {
      	data.items.forEach(function(data) {
-        var item = Items();
-        item.render(data);
+        this.item = Items(data);
+        Items.prototype.render(item);
         }); 	
     } else {
     	var result = $('<p>').text('No results');
@@ -63,8 +63,8 @@ function watchSubmit() {
     e.preventDefault();	
 	  $('.js-search-results').empty();    
     var query = $(this).find('.js-query').val();
-    Data(query, displaySearchData);
-    Data.callAPI();
+    Data(query);
+    Data.prototype.callAPI(displaySearchData);
     $('.js-query').val('');
   });
 

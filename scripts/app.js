@@ -12,7 +12,6 @@ var Data = function(searchTerm){
 
 // The API call to YouTube
 Data.prototype.callAPI = function(callback){
-  console.log(callback)
   $.getJSON(url, query, callback);
 }
 
